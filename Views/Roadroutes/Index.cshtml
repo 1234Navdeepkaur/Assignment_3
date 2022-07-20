@@ -1,0 +1,52 @@
+﻿@model IEnumerable<BusManagement.Models.Roadroute>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_Layout";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FromLocation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ToLocation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FairPrice)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FromLocation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ToLocation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FairPrice)
+            </td>
+            <td>
+                    @if (@Context.User.Identity.IsAuthenticated)
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    }
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
